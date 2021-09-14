@@ -73,7 +73,7 @@ function setFilters(e, keyword) {
 		if(value === 'Not Completed'){
 			value = false
 		}
-	}else if(keyword === 'userId'){
+	}else if(keyword === 'userId' && value !== 'All'){
 		value = parseInt(value);
 	}
 	filters[keyword] = value === 'All' ? null : value;
