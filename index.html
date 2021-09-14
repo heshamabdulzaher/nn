@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container">
-         <select class="search" name="todo" >
-      
-      
-      </select>
-        <div class="target"></div>
-     
-      <select class="todo__completed" name="todo" id="">
-        <optgroup label="select filter">
-        <option value="all">all</option>
-        <option value="completed">completed</option>
-        <option value="progress">progress</option>
-        </optgroup>
-      </select>
-      <div class="todo"></div>
-      
-     
-      </div>
-    </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<main class="container">
+			<div class="filters">
+				<section>
+					<label>Filter by user ID:</label>
+					<select class="users-ddl" onchange="setFilters(event, 'userId')">
+						<!-- options is gonna generated dynamicly -->
+					</select>
+				</section>
+				<section>
+					<label>Filter by Status:</label>
+					<select class="statuses-ddl" onchange="setFilters(event, 'completed')">
+						<!-- options is gonna generated dynamicly -->
+					</select>
+				</section>
+			</div>
+			<div class="todos-list">
+				<h2>
+					Todos list 
+					<span><!-- Todos quantity will rendered here dynamicly --></span>
+				</h2>
+				<ul>
+					<!-- todos list is gonna generated dynamicly -->
+				</ul>
+			</div>
+		</main>
 
-    <script src="./js/main.js"></script>
-  </body>
+		<!-- <div class="container">
+			<select class="search" name="todo"></select>
+			<div class="target"></div>
+
+			<select class="todo__completed" name="todo" id="">
+				<optgroup label="select filter">
+					<option value="all">all</option>
+					<option value="completed">completed</option>
+					<option value="progress">progress</option>
+				</optgroup>
+			</select>
+			<div class="todo"></div>
+		</div> -->
+
+		<script src="./index.js"></script>
+	</body>
 </html>
