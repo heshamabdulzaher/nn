@@ -38,12 +38,10 @@ function renderFilters() {
 	const statusesDDL = document.querySelector('select.statuses-ddl');
 	// Fill users ddl
 	users_IDs.unshift('All');
-	usersDDL.innerHTML = ''
 	users_IDs.forEach(id => {
 		usersDDL.innerHTML += `<option value="${id}">${id}</option>`;
 	});
 	// Fill statuses ddl
-	statusesDDL.innerHTML = ''
 	statuses.forEach(status => {
 		statusesDDL.innerHTML += `<option value="${status}">${status}</option>`;
 	});
@@ -67,9 +65,11 @@ function renderTodos() {
 function setFilters(e, keyword) {
 	let value = e.target.value;
 	if(keyword === 'completed'){
+		// Completed >> true
 		if(value === 'Completed'){
 			value = true
 		}
+		// Not Completed >> false
 		if(value === 'Not Completed'){
 			value = false
 		}
@@ -77,7 +77,12 @@ function setFilters(e, keyword) {
 		value = parseInt(value);
 	}
 	filters[keyword] = value === 'All' ? null : value;
-	const updatedFilters = Object.entries(filters).filter(([key, value]) => value !== null);
+	// to convert object into array of arrays {x: 1, y: 2} => [['x', 1], ['y', 2]]
+	// .filter(([key, value]) => value !== null) => to filter the array and do NOT return the item has null
+	const updatedFilters = Object.entries(filters).filter((itm) => itm[1] !== null);
+
+	// filtersObj = {userId: 1, completed: false}
+	// todoObj = {userId: 1, completed: false, title: lorem title, id: 16323}
 	const isSubset = (superObj, subObj) => {
 		return Object.keys(subObj).every(ele => {
 			if (typeof subObj[ele] == 'object') {
@@ -86,7 +91,6 @@ function setFilters(e, keyword) {
 			return subObj[ele] === superObj[ele]
 		});
 	};
-	const updated = AllTodos.filter(todo => isSubset(todo, Object.fromEntries(updatedFilters)));
-	filteredTodos = updated;
+	filteredTodos = AllTodos.filter(todo => isSubset(todo, Object.fromEntries(updatedFilters)));
 	renderTodos();
 }
